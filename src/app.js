@@ -6,6 +6,8 @@ import path from 'path'
 
 //internal import
 import { errorHandler, notFoundHandler } from './middlewares/common/errorHandler.js'
+import usersRouter from './routes/users.router.js'
+import inboxRouter from './routes/inbox.router.js'
 
 const app =  express()
 
@@ -26,9 +28,8 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 
 
 //setup routes
-app.get('/', (req, res)=>{
-    res.render('home');
-})
+app.use('/api/users/', usersRouter)
+app.use('/api/inbox', inboxRouter)
 
 
 //404 not found error
