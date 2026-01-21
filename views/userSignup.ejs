@@ -12,7 +12,7 @@
   <div class="w-full max-w-md bg-gray-800 rounded-2xl shadow-xl p-8">
     <h2 class="text-3xl font-bold text-center text-white mb-6">Create Your Account</h2>
 
-    <form action="/signup" method="POST" class="space-y-5">
+    <form action="/api/v1/users/signup" method="POST" enctype="multipart/form-data" class="space-y-5">
       <!-- Full Name -->
       <div>
         <label for="name" class="block text-gray-300 mb-1">Full Name</label>
@@ -31,6 +31,12 @@
       <div>
         <label for="password" class="block text-gray-300 mb-1">Password</label>
         <input type="password" name="password" id="password" placeholder="Enter your password" required
+          class="w-full px-4 py-3 rounded-xl bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400">
+      </div>
+      <!-- avatar -->
+      <div>
+        <label for="avatar" class="block text-gray-300 mb-1">avatar</label>
+        <input type="file" name="avatar" id="avatar" placeholder="Choose an avatar" required
           class="w-full px-4 py-3 rounded-xl bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400">
       </div>
 

@@ -1,52 +1,84 @@
-const userSignUp = async(req, res)=>{
+import { User } from '../models/users.model.js'
 
+const userSignUp = async (req, res) => {
     try {
-        res.render('userSignup',{
-            title:"login Chatt-Application"
-        })
+        const { name, email, password } = req.body;
+
+        if (!name || !email || !password) {
+            return res.status(400).json({
+                message: "All fields are required"
+            });
+        }
+
+        const avatar = req.file;
+        if (!avatar) {
+            return res.status(400).json({
+                message: "Avatar image is required"
+            });
+        }
+
+        const user = await User.create(
+            {
+                name,
+                email,
+                password,
+                avatar: avatar.path
+            }
+        )
+
+        user.save();
+
+        return res.status(201).json({
+            message: "User registered successfully",
+            user
+        });
+
     } catch (error) {
-        throw new ApiError (400, "Wrong userLogin")
+        return res.status(500).json({
+            message: error.message || "Signup failed"
+        });
     }
-}
+};
 
 
-const userLogin = async(req, res)=>{
+
+const userLogin = async (req, res) => {
 
     try {
         res.render('userLogin', {
-            title:"Login Chatt - Application"
+            title: "Login Chatt - Application"
         })
     } catch (error) {
-        
+
     }
 }
 
-const getAllUsers = async(req, res)=>{
+const getAllUsers = async (req, res) => {
 
     try {
         res.render('userLogin', {
-            title:"Login Chatt - Application"
+            title: "Login Chatt - Application"
         })
     } catch (error) {
-        
+
     }
 }
-const getUsersById = async(req, res)=>{
+
+const getUsersById = async (req, res) => {
 
     try {
         res.render('userLogin', {
-            title:"Login Chatt - Application"
+            title: "Login Chatt - Application"
         })
     } catch (error) {
-        
+
     }
 }
 
 
-export { 
+export {
     userSignUp,
     userLogin,
     getAllUsers,
     getUsersById
-
- }
+}

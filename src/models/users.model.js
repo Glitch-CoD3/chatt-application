@@ -8,6 +8,7 @@ const userSchema= new mongoose.Schema({
     email:{
         type: String,
         required: true,
+        lowercase:true,
     },
     password:{
         type: String,
@@ -19,9 +20,10 @@ const userSchema= new mongoose.Schema({
     },
     role:{
         type: String,
-        default:user,
+        enum: ['admin' , 'user'],
+        default:"user",
     },
-} ,{timestamps})
+} ,{timestamps: true})
 
 
 export const User  = mongoose.model("User",userSchema )

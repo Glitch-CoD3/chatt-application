@@ -28,8 +28,8 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 
 
 //setup routes
-app.use('/api/users/', usersRouter)
-app.use('/api/inbox', inboxRouter)
+app.use('/api/v1/users', usersRouter)
+app.use('', inboxRouter)
 
 
 //404 not found error
