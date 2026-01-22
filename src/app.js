@@ -28,8 +28,11 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 
 
 //setup routes
+
+//signup and login route
 app.use('/api/v1/users', usersRouter)
 app.use('', inboxRouter)
+
 
 
 //404 not found error

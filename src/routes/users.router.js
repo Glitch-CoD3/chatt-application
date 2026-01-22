@@ -18,6 +18,13 @@ router.get('/signup', (req, res) => {
 })
 router.post('/signup', upload.single("avatar"), userSignUp)
 
+//user login page and Post
+router.get('/login', (req, res) => {
+    res.render('userLogin', {
+        title: "login Chatt-Application"
+    })
+})
+router.post('/login', userLogin)
 
 
 export default router;
