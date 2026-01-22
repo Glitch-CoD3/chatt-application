@@ -102,10 +102,15 @@ const userLogin = async (req, res) => {
         const userData = user.toObject();
         delete userData.password;
 
+        //getAll users except logged in user
+        const allUsers = await User.find().select('-password');
 
+        console.log(allUsers);
         // Success response
         return res.status(200).render('home', {
-            user: userData
+            user: userData,
+            allUsers: allUsers,
+            title: "Home - Chatt Application"
         })
 
 
@@ -117,16 +122,6 @@ const userLogin = async (req, res) => {
     }
 }
 
-const getAllUsers = async (req, res) => {
-
-    try {
-        res.render('userLogin', {
-            title: "Login Chatt - Application"
-        })
-    } catch (error) {
-
-    }
-}
 
 const getUsersById = async (req, res) => {
 
@@ -143,6 +138,5 @@ const getUsersById = async (req, res) => {
 export {
     userSignUp,
     userLogin,
-    getAllUsers,
     getUsersById
 }

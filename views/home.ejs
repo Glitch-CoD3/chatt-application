@@ -1,11 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+  <meta charset="UTF-8" />
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <p>Hello World!</p>
+<body class="h-screen bg-gray-900 text-white">
+
+<div class="flex h-full">
+
+  <!-- LEFT SIDEBAR -->
+  <div class="w-1/4 bg-gray-800 border-r border-gray-700 flex flex-col">
+
+    <!-- LOGGED-IN USER HEADER -->
+    <div class="p-4 flex items-center gap-3 border-b border-gray-700">
+      <img src="<%= user.avatar %>" class="w-10 h-10 rounded-full object-cover" />
+      <div>
+        <p class="font-semibold"><%= user.name %></p>
+        <p class="text-sm text-gray-400">Online</p>
+      </div>
+    </div>
+
+    <!-- CHAT LIST HEADER -->
+    <div class="p-4 text-lg font-semibold border-b border-gray-700">
+      Chats
+    </div>
+
+    <!-- CHAT LIST -->
+    <div class="flex-1 overflow-y-auto">
+      <% allUsers.forEach(u => { %>
+        <div
+          class="flex items-center gap-3 p-3 hover:bg-gray-700 cursor-pointer border-b border-gray-700"
+          onclick="loadChat('<%= u._id %>', '<%= u.name %>', '<%= u.avatar %>')"
+        >
+          <img src="<%= u.avatar %>" class="w-12 h-12 rounded-full object-cover" />
+          <span class="font-medium"><%= u.name %></span>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <!-- RIGHT CHAT AREA -->
+  <div class="flex-1 flex flex-col">
+
+    <!-- CHAT HEADER -->
+    <div id="chatHeader" class="p-4 bg-gray-800 border-b border-gray-700 flex items-center gap-3">
+      Select a user
+    </div>
+
+    <!-- MESSAGES -->
+    <div id="chatMessages" class="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-900">
+      <p class="text-gray-400 text-center mt-5">Select a user to start chatting</p>
+    </div>
+
+    <!-- INPUT BOX -->
+    <div class="p-4 bg-gray-800 border-t border-gray-700">
+      <input type="text"
+             placeholder="Type a message..."
+             class="w-full p-2 rounded bg-gray-700 outline-none"
+             disabled />
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // ===== CLICK HANDLER FOR USERS =====
+  const chatHeader = document.getElementById("chatHeader");
+  const chatMessages = document.getElementById("chatMessages");
+
+  function loadChat(userId, name, avatar) {
+    // Update chat header
+    chatHeader.innerHTML = `
+      <img src="${avatar}" class="w-10 h-10 rounded-full" />
+      <span class="font-semibold">${name}</span>
+    `;
+
+    // Placeholder messages (can replace with backend AJAX call later)
+    chatMessages.innerHTML = `
+      <div class="text-gray-400 mt-5">
+        Chat with ${name} will appear here
+      </div>
+    `;
+  }
+</script>
+
 </body>
 </html>
